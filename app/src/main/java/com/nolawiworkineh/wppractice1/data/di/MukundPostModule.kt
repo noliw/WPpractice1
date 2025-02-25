@@ -1,7 +1,9 @@
 package com.nolawiworkineh.wppractice1.data.di
 
 import com.nolawiworkineh.wppractice1.data.MukundApiService
+import com.nolawiworkineh.wppractice1.data.MukundRepositoryImpl
 import com.nolawiworkineh.wppractice1.data.MukundsRetrofitClient
+import com.nolawiworkineh.wppractice1.domain.PostsRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,5 +23,10 @@ object MukundPostModule {
     @Singleton
     fun providePostApiService(retrofit: Retrofit): MukundApiService =
         retrofit.create(MukundApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun providePostsRepoImpl(apiService: MukundApiService): PostsRepo =
+        MukundRepositoryImpl(apiService)
 
 }
