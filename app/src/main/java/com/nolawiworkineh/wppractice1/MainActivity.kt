@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.nolawiworkineh.wppractice1.presentation.MukundPostsScreen
+import com.nolawiworkineh.wppractice1.presentation.PostsScreen
 import com.nolawiworkineh.wppractice1.ui.theme.WPpractice1Theme
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +23,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             WPpractice1Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+                    PostsScreen(
+                        modifier = Modifier.padding(innerPadding),
+                    )
                 }
             }
         }
