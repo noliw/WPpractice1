@@ -1,5 +1,6 @@
 package com.nolawiworkineh.wppractice1.data.di
 
+import com.nolawiworkineh.wppractice1.data.ApiService
 import com.nolawiworkineh.wppractice1.data.PostsModel
 import com.nolawiworkineh.wppractice1.data.RetrofitClient
 import dagger.Module
@@ -16,5 +17,9 @@ object MukundPostModule{
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit = RetrofitClient.retrofit
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
 }
