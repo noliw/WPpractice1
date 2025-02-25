@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WPpractice1Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MukundPostsScreen(modifier = Modifier.padding(innerPadding))
+
                 }
             }
         }
