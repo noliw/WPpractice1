@@ -24,5 +24,9 @@ object RetrofitClient {
         .build()
         *
         * .client(client)
+        *
+        *     private val moshi: Moshi = Moshi.Builder().build()
+
 * */
+
 }

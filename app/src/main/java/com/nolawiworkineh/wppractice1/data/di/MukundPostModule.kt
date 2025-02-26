@@ -17,6 +17,27 @@ import javax.inject.Singleton
 object MukundPostModule{
     // this module tells hilt how to construct each depenccy like retrofit
 
+
+    /*
+    * @Provides
+    @Singleton
+    fun provideOkHttpClient(): OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(client: OkHttpClient): Retrofit =
+        Retrofit.Builder()
+            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .client(client) // ✅ Use injected OkHttpClient
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+    * */
+
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit = RetrofitClient.retrofit
