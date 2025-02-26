@@ -17,6 +17,9 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+// this basically tells hilt that this is the entry point and to inject dependencies into
+// this class, without this the app will crash at runtime
+// the app class creates the application graph but does not inject the dependencies in activities
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

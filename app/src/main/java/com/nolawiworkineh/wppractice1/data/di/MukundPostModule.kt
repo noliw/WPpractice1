@@ -15,6 +15,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object MukundPostModule{
+    // this module tells hilt how to construct each depenccy like retrofit
 
     @Provides
     @Singleton
