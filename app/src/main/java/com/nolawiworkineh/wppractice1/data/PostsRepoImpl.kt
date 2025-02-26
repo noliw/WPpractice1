@@ -21,3 +21,18 @@ class PostsRepoImpl @Inject constructor(
         }
     }
 }
+
+/*
+* override fun getPosts(): Flow<List<PostsModel>> = flow {
+    try {
+        val posts = apiService.getPosts()
+        emit(posts) // ✅ Emit API response
+    } catch (e: Exception) {
+        when (e) {
+            is CancellationException -> throw e
+            else -> Log.e("PostsRepoImpl", "Error: ${e.message}")
+        }
+        emit(emptyList()) // ✅ Emit fallback value
+    }
+}.flowOn(Dispatchers.IO) // ✅ Run on IO thread
+* */
