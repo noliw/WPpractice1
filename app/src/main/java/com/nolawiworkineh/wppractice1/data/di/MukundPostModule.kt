@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object MukundPostModule{
+object MukundPostModule {
     // this module tells hilt how to construct each depenccy like retrofit
 
 
@@ -44,7 +44,8 @@ object MukundPostModule{
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiService =
+        retrofit.create(ApiService::class.java)
 
     @Provides
     @Singleton
