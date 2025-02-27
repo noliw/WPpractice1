@@ -1,15 +1,16 @@
 package com.nolawiworkineh.wppractice1.presentation
 
 import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nolawiworkineh.wppractice1.data.PostsModel
 import com.nolawiworkineh.wppractice1.domain.PostsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
@@ -20,18 +21,40 @@ class PostsViewModel @Inject constructor(
     private val postsRepo: PostsRepo
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<List<PostsModel>>(emptyList())
-    var state = _state
+    private val _postsState = MutableStateFlow<List<PostsModel>>(emptyList())
+//    var state = _state
 
-
-    init {
+    var postsState : StateFlow<List<PostsModel>> = _postsState.onStart {
         getPosts()
     }
+    .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    private val _idState = MutableStateFlow<PostsModel?>(null)
+//    var state = _state
+
+    var idState : StateFlow<PostsModel?> = _idState
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
     private fun getPosts() {
         viewModelScope.launch {
             try {
-                _state.value = postsRepo.getPosts()
+                _postsState.value = postsRepo.getPosts()
+            } catch (e: Exception) {
+                when (e) {
+                    is CancellationException -> throw e
+                    else -> Log.e("PostsViewModel", "The following error occurred ${e.message}")
+                }
+            }
+        }
+
+    }
+
+    fun getPostById(id: Int) {
+        viewModelScope.launch {
+            try {
+                _idState.value = postsRepo.getPostById(
+                    id = id
+                )
             } catch (e: Exception) {
                 when (e) {
                     is CancellationException -> throw e

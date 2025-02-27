@@ -1,6 +1,7 @@
 package com.nolawiworkineh.wppractice1.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,13 +17,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 
 @Composable
 fun PostsScreen(
     viewModel: PostsViewModel = hiltViewModel(),
+    onPostClick: (Int) -> Unit = {},
     modifier: Modifier = Modifier
+
 ) {
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.postsState.collectAsState()
 
     LazyColumn(
         modifier = modifier
@@ -34,6 +38,7 @@ fun PostsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
+                    .clickable {  }
             ) {
                 Text(
                     text = post.title

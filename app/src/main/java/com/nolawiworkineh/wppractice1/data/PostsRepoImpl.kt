@@ -20,10 +20,22 @@ class PostsRepoImpl @Inject constructor(
             emptyList()
         }
     }
+
+    override suspend fun getPostById(id: Int): PostsModel {
+        return try {
+            apiService.getPostById(id)
+        } catch (e: Exception) {
+            when (e) {
+                is CancellationException -> throw e // ✅ Preserve coroutine cancellation
+                else -> Log.e("PostsRepoImpl", "Error fetching post $id: ${e.message}")
+            }
+            PostsModel(id, "Error", "Failed to load post") // ✅ Return fallback data
+        }
+    }
 }
 
 /*
-* override fun getPosts(): Flow<List<PostsModel>> = flow {
+override fun getPosts(): Flow<List<PostsModel>> = flow {
     try {
         val posts = apiService.getPosts()
         emit(posts) // ✅ Emit API response
@@ -35,4 +47,4 @@ class PostsRepoImpl @Inject constructor(
         emit(emptyList()) // ✅ Emit fallback value
     }
 }.flowOn(Dispatchers.IO) // ✅ Run on IO thread
-* */
+*/
