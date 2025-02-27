@@ -22,7 +22,7 @@ import androidx.navigation.NavController
 @Composable
 fun PostsScreen(
     viewModel: PostsViewModel = hiltViewModel(),
-    onPostClick: (Int) -> Unit = {},
+    onPostClick: (String) -> Unit,
     modifier: Modifier = Modifier
 
 ) {
@@ -38,7 +38,7 @@ fun PostsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
-                    .clickable {  }
+                    .clickable { onPostClick(post.id) }
             ) {
                 Text(
                     text = post.title

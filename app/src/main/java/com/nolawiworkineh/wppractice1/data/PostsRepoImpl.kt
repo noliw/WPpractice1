@@ -21,7 +21,7 @@ class PostsRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun getPostById(id: Int): PostsModel {
+    override suspend fun getPostById(id: String): PostsModel {
         return try {
             apiService.getPostById(id)
         } catch (e: Exception) {

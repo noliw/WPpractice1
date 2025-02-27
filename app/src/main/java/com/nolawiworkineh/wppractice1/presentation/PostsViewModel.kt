@@ -49,11 +49,11 @@ class PostsViewModel @Inject constructor(
 
     }
 
-    fun getPostById(id: Int) {
+    fun getPostById(id: String) {
         viewModelScope.launch {
             try {
                 _idState.value = postsRepo.getPostById(
-                    id = id
+                    id
                 )
             } catch (e: Exception) {
                 when (e) {

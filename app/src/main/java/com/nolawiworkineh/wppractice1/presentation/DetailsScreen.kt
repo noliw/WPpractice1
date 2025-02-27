@@ -18,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun PostDetailScreen(
-    postId: Int,
+    postId: String,
     viewModel: PostsViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {

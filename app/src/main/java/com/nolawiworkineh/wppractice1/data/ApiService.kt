@@ -11,5 +11,5 @@ interface ApiService {
     // if data is not static use flow Flow<List<PostsModel>>
 
     @GET("posts/{id}")
-    suspend fun getPostById(@Path("id") id: Int): PostsModel
+    suspend fun getPostById(@Path("id") id: String): PostsModel
 }

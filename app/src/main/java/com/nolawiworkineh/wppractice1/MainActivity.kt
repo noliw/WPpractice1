@@ -51,11 +51,11 @@ class MainActivity : ComponentActivity() {
                             route = "post_detail/{postId}",
                             arguments = listOf(
                                 navArgument("postId") {
-                                    type = NavType.IntType
+                                    type = NavType.StringType
                                 }
                             )
                         ) { backStackEntry ->
-                            val postId = backStackEntry.arguments?.getInt("postId") ?: -1
+                            val postId = backStackEntry.arguments?.getString("postId") ?: ""
                             PostDetailScreen(postId = postId)
                         }
                     }
